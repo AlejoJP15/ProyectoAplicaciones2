@@ -1,0 +1,22 @@
+# Ignorar entornos virtuales
+venv/
+env/
+
+# Ignorar dependencias de Node.js
+node_modules/
+
+# Ignorar cachés de Python
+__pycache__/
+*.pyc
+
+# Ignorar archivos grandes y temporales
+*.log
+*.tmp
+*.dll
+*.pyd
+*.lib
+
+# Ignorar sistemas operativos
+.DS_Store
+Thumbs.db
+ 
