@@ -1,0 +1,21 @@
+Sprint 5: Configuración de Frontend y Pantallas Básicas
+
+- Se configuró React como framework frontend para el programa principal, incluyendo la estructura inicial del proyecto, organización de carpetas, y creación de componentes básicos reutilizables.
+- Se implementaron las pantallas de inicio de sesión y registro de usuarios, con validación de formularios y conexión al backend para gestionar autenticación.
+- Estas mejoras sentaron las bases del frontend para su integración con las siguientes funcionalidades del sistema.
+
+Sprint 6: Integración Frontend y Backend
+
+- Se estableció la conexión entre el frontend (React) y el backend (Node.js para chatbot y Python para programa principal), permitiendo el intercambio de datos entre ambos.
+- Se integraron flujos completos para el inicio de sesión y registro, asegurando que las interacciones del usuario con el sistema se registraran correctamente en la base de datos.
+- Se añadieron mecanismos para gestionar sesiones de usuario y validar la comunicación con el microservicio del chatbot.
+
+Sprint 7: Personalización del Chatbot y Entrenamiento de Modelos
+
+- El chatbot fue personalizado para mostrar un mensaje de bienvenida con el nombre del usuario autenticado, registrar interacciones en tiempo real y permitir el cierre de sesión.
+- Se entrenaron modelos de reconocimiento emocional para detección facial y vocal, asegurando una precisión mínima del 85%.
+- Los resultados del entrenamiento se documentaron, y los modelos se integraron al sistema para su futura evaluación en escenarios reales.
+- Actualizaciones en el Repositorio
+
+Se añadió una carpeta específica con los archivos y configuraciones generados durante el entrenamiento de los modelos en el Sprint 7.
+El programa principal fue actualizado en el repositorio, incluyendo las nuevas funcionalidades desarrolladas y las conexiones entre los diferentes módulos del sistema.
