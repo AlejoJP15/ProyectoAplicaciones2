@@ -69,21 +69,32 @@ def register():
     email = data.get("email")
     password = data.get("password")
     # Validar que el correo electrónico tenga un formato válido
+    if not name or not email or not password:
+        return jsonify({"success": False, "message": "Por favor completa todos los campos"}), 400
+
     if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-        return jsonify({"success": False, "message": "Correo electrónico inválido"}), 400
+        return jsonify({"success": False, "message": "Por favor ingresa un correo válido"}), 400
+
+    if len(password) < 6:
+        return jsonify({"success": False, "message": "La contraseña debe tener al menos 6 caracteres"}), 400
 
     # Encriptar la contraseña
     hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
     conn = get_db_connection()
-    cur = conn.cursor()
 
     try:
-        cur.execute(
+        with conn.cursor() as cur:
+            cur.execute("SELECT 1 FROM usuarios WHERE correo = %s", (email,))
+            if cur.fetchone():
+                return jsonify({"success": False, "message": "El correo ya está en uso"}), 400
+
+            cur.execute(
             "INSERT INTO usuarios (nombre, correo, contraseña) VALUES (%s, %s, %s)",
             (name, email, hashed_password.decode("utf-8")),
         )
         conn.commit()
         return jsonify({"success": True, "message": "Usuario registrado exitosamente"})
+    
     except psycopg2.IntegrityError as e:  # Manejar errores de integridad, como el correo duplicado
         conn.rollback()
         if "unique_email" in str(e):  # Asegúrate de que coincide con tu restricción de unicidad
@@ -105,37 +116,43 @@ def login():
     password = data.get("password")
     dispositivo = data.get("dispositivo")
     canal = data.get("canal")
-
+    email = email.strip() 
+    
+    if not email or not password:
+        return jsonify({"success": False, "message": "Por favor completa todos los campos"}), 400
+    
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        return jsonify({"success": False, "message": "Por favor ingresa un correo válido"}), 400
     conn = get_db_connection()
-    cur = conn.cursor()
-
+    
     try:
-        cur.execute("SELECT * FROM usuarios WHERE correo = %s", (email,))
-        user = cur.fetchone()
+        with conn.cursor() as cur:
+        # Buscar usuario por correo
+            cur.execute("SELECT * FROM usuarios WHERE correo = %s", (email,))
+            user = cur.fetchone()
 
-        # Validar si el usuario existe
-        if not user:
-            return jsonify({"success": False, "message": "El usuario no existe"}), 404
+            if not user:
+                return jsonify({"success": False, "message": "Correo o contraseña incorrecta"}), 404
 
-        # Validar la contraseña
-        if not bcrypt.checkpw(password.encode("utf-8"), user[3].encode("utf-8")):
-            return jsonify({"success": False, "message": "Contraseña incorrecta"}), 401
+            # Validar contraseña
+            hashed_password = user[3]
+            if not bcrypt.checkpw(password.encode("utf-8"), hashed_password.encode("utf-8")):
+                return jsonify({"success": False, "message": "Correo o contraseña incorrecta"}), 401
 
-        if user and bcrypt.checkpw(password.encode("utf-8"), user[3].encode("utf-8")):
-            id_usuario = user[0]
-            nombre_usuario=user[1]
-            # Inserta una nueva sesión con inicio_sesion y fin_sesion como NULL
-            cur.execute("""
+            # Crear nueva sesión
+            cur.execute(
+                """
                 INSERT INTO sesiones (id_usuario, dispositivo, canal, inicio_sesion, fin_sesion) 
                 VALUES (%s, %s, %s, NOW(), NULL) 
                 RETURNING id_sesion;
-            """, (id_usuario, dispositivo, canal))
+                """,
+                (user[0], dispositivo, canal),
+            )
             id_sesion = cur.fetchone()[0]
             conn.commit()
-
-            return jsonify({"success": True, "id_sesion": id_sesion, "nombre": nombre_usuario})
-        return jsonify({"success": False, "message": "Credenciales incorrectas"})
-    except Exception as e:
+            rol = user[5]  # Cambiar según tu modelo de base de datos
+        return jsonify({"success": True, "id_sesion": id_sesion, "nombre": user[1], "rol": rol})
+    except psycopg2.Error as e:
         print("Error al iniciar sesión:", e)
         return jsonify({"success": False, "message": str(e)})
     finally:
