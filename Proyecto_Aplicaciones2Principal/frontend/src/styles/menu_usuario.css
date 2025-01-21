@@ -1,0 +1,86 @@
+
+/* Estilos para el título */
+.menu-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #38bdf8, #3c5053, #4c8bb5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 1s ease-out;
+  }
+  
+  /* Animación de aparición */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+/* Fondo general del menú */
+.menu-container {
+    background-image: url('C:\Users\alejo\Downloads\Proyecto_Grado\Proyecto_Aplicaciones2Principal\frontend\public\FondoLogin.webp'); /* Ruta del fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    
+  }
+  
+  /* Caja del menú */
+  .menu-box {
+    background: rgba(255, 255, 255, 0.95); /* Fondo semitransparente */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-out;
+  }
+  
+  /* Estilos de los ítems del menú */
+  .menu-item {
+    list-style: none;
+  }
+  
+  /* Botones del menú */
+  .menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #64819b; /* Azul oscuro */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.1s ease;
+  }
+  
+  .menu-button:hover {
+    background-color: #3274de; /* Azul más claro */
+  }
+  
+  .menu-button:active {
+    transform: scale(0.98); /* Efecto de clic */
+  }
+  
+  /* Iconos de los botones */
+  .icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+  
+  /* Botón de cerrar sesión */
+  .logout {
+    background-color: #e53e3e; /* Rojo */
+  }
+  
+  .logout:hover {
+    background-color: #c53030; /* Rojo más oscuro */
+  }
+  

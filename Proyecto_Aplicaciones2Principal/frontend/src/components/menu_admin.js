@@ -3,13 +3,25 @@ import { useNavigate } from "react-router-dom";
 
 function MenuAdmin() {
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    // Limpiar sesión
-    localStorage.removeItem("id_sesion");
-    localStorage.removeItem("nombre_usuario");
-    localStorage.removeItem("role");
-    navigate("/login");  // Redirige al login
+  const sessionId = localStorage.getItem("id_sesion");
+ 
+  const handleLogout = async () => {
+    try {
+      // Enviar solicitud de logout al backend
+      await fetch("http://localhost:5000/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id_sesion: sessionId }),
+      });
+      // Limpiar el session_id del localStorage
+      localStorage.removeItem("id_sesion");
+      localStorage.removeItem("nombre_usuario");
+      localStorage.removeItem("role");
+      // Redirigir al usuario al login
+      window.location.href = "/login";
+    } catch (err) {
+      console.error("Error al cerrar sesión:", err);
+    }
   };
 
   const handleUserManagement = () => {

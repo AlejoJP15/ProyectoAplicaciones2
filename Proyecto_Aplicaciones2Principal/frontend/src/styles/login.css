@@ -1,0 +1,111 @@
+/* Configuración del fondo general */
+.login-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    background-image: url('C:\Users\alejo\Downloads\Proyecto_Grado\Proyecto_Aplicaciones2Principal\frontend\public\FondoLogin.webp'); /* Asegúrate de que esta imagen esté en la carpeta public */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  /* Contenedor del logo */
+  .logo-container {
+    margin-bottom: 20px; /* Espaciado entre el logo y el formulario */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .logo {
+    width: 300px; /* Tamaño del logo */
+    height: 300px;
+    object-fit: contain;
+  }
+  
+  /* Contenedor del login */
+  .login-box {
+    background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Título del login */
+  .login-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Mensajes de error */
+  .error-message {
+    color: red;
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  /* Estilo de los inputs */
+  .login-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .login-input:focus {
+    border-color: #4f46e5;
+    outline: none;
+  }
+  
+  /* Botón de login */
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .button-active {
+    background-color: #8584a0;
+  }
+  
+  .button-active:hover {
+    background-color: #3b82f6;
+  }
+  
+  .button-loading {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+  }
+  
+  /* Links del login */
+  .login-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .link {
+    font-size: 0.9rem;
+    color: #4f46e5;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  

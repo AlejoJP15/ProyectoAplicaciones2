@@ -1,0 +1,33 @@
+/* Estilos personalizados */
+.register-container {
+    background-image: url('C:\Users\alejo\Downloads\Proyecto_Grado\Proyecto_Aplicaciones2Principal\frontend\public\FondoLogin.webp'); /* Imagen de fondo */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Campos del formulario */
+  .register-input {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .register-input:focus {
+    box-shadow: 0 0 5px rgba(79, 70, 229, 0.8); /* Sombra al enfocar */
+  }
+  
+  /* Mensajes de error */
+  .text-red-600 {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  /* Animación de aparición */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
